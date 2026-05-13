@@ -12,5 +12,6 @@ dist*/
 runs*/
 data*/
 __pycache__/
+*.egg-info/
 temp*.py
-run*.bat
+temp*.bat
