@@ -253,6 +253,10 @@ class Sap2000Api:
         ret = self.SapModel.PropFrame.SetRectangle(name, mat, h, b)
         return ret
 
+    def setFrameSection(self,frameName: str, sectName: str, ItemType=0):
+        """给 frame 指定 新的 section  """
+        self.SapModel.FrameObj.SetSection(frameName, sectName, ItemType)
+
     # ==============================================================================
     # 新建一个节点
     # ==============================================================================
