@@ -8,6 +8,7 @@ from .Material import Material
 from .Load import Load
 from .Node import Node
 from .Frame import Frame
+from .Area import Area
 
 from .Result import Result
 
@@ -30,6 +31,7 @@ class Sap2000Api:
 
         self.Node = Node(self.SapModel)
         self.Frame = Frame(self.SapModel)
+        self.Area = Area(self.SapModel)
 
         self.Result = Result(self.SapModel)
 
