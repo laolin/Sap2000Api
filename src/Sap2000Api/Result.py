@@ -1,5 +1,5 @@
 """
-Sap2000 API - SapResult
+Sap2000 API - Result
 Copyright (c) 2026 laolin. See LICENSE for details.
 """
 
@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
 from Sap2000Api import Sap2000Api
 
-class SapResult:
+class Result:
 
     def __init__(self, sap_model) -> None:
         self.SapModel = sap_model
@@ -56,7 +56,7 @@ class SapResult:
         # ]
         # ItemTypeElm: 见SAP说明，ObjectElm = 0, Element = 1, GroupElmc = 2, SelectionElm = 3
         r = self.SapModel.Results.JointDispl(pName, ItemType)
-        return SapResult.__RET(r, 7, 12)
+        return Result.__RET(r, 7, 12)
 
     # 节点位移-绝对位移
     #  Absolute and relative displacements are the same except when reported for time history load cases subjected to acceleration loading.
@@ -78,7 +78,7 @@ class SapResult:
         # ]
         # ItemTypeElm: 见SAP说明，ObjectElm = 0, Element = 1, GroupElmc = 2, SelectionElm = 3
         r = self.SapModel.Results.JointDisplAbs(pName, ItemType)
-        return SapResult.__RET(r, 7, 12)
+        return Result.__RET(r, 7, 12)
 
     # 节点反力（基于节点的局部坐标。默认同全局坐标，但是节点的局部坐标是可以修改的）
     # 返回的值和符号是 基于节点的局部坐标（SAP里通常节点局部坐标同全局坐标）的杆端内力
@@ -101,7 +101,7 @@ class SapResult:
         # ]
         # ItemTypeElm: 见SAP说明，ObjectElm = 0, Element = 1, GroupElmc = 2, SelectionElm = 3
         r = self.SapModel.Results.JointReact(pName, ItemType)
-        return SapResult.__RET(r, 7, 12)
+        return Result.__RET(r, 7, 12)
 
     # 杆件内力（分段，会按杆单元的荷载作用点自动分段，基于杆单元局部坐标）
     def getFrameForce(self, frmName: str, ItemType: int = 0):

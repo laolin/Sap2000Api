@@ -9,7 +9,7 @@ from .Load import Load
 from .Node import Node
 from .Frame import Frame
 
-from .SapResult import SapResult
+from .Result import Result
 
 class Sap2000Api:
 
@@ -31,7 +31,7 @@ class Sap2000Api:
         self.Node = Node(self.SapModel)
         self.Frame = Frame(self.SapModel)
 
-        self.Result = SapResult(self.SapModel)
+        self.Result = Result(self.SapModel)
 
     # ==============================================================================
     #  1 开始sap2000进程 (基础管理保留在主类)
