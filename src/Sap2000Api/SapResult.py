@@ -12,9 +12,8 @@ from Sap2000Api import Sap2000Api
 
 class SapResult:
 
-    def __init__(self, sapapi: Sap2000Api) -> None:
-        self.SapObject = sapapi.SapObject
-        self.SapModel = sapapi.SapModel
+    def __init__(self, sap_model) -> None:
+        self.SapModel = sap_model
 
     def deselectAllLoadCases(self):
         self.SapModel.Results.Setup.DeselectAllCasesAndCombosForOutput()

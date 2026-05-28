@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Sap2000Api"
-version = "0.1.0"
+version = "1.1.0"
 description = "Sap2000 API for python"
 readme = "README.md"
 license = { text = "MIT" }
