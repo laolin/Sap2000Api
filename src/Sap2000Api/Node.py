@@ -56,3 +56,29 @@ class Node:
             0 表示成功, 非0 表示失败
         """
         return self.SapModel.ConstraintDef.SetDiaphragm(name, axis, CSys)
+
+    # ==============================================================================
+    #  将节点分配到约束 (Assign Constraint to Point Objects)
+    #  将指定的节点约束（如隔板约束）分配给相应的节点对象
+    # ==============================================================================
+    def setNodeDiaphragm(self, nodeName: str, DiaphragmName: str, Replace: bool = True, ItemType: int = 0) -> int:
+        """将节点分配到指定的约束 (Assign Constraint to Point Objects)
+
+        Parameters
+        ----------
+        nodeName : str
+            节点名称或组名称，取决于 ItemType 取值
+        constraintName : str
+            已定义的约束名称（如通过 setDiaphragm 定义的隔板约束）
+        Replace : bool
+            是否替换该节点上已有的约束分配, 默认True
+        ItemType : int
+            指定 nodeName 的含义: 0=Object(按名称), 1=Group(按组), 2=SelectedObjects(按选中对象),
+            默认0
+
+        Returns
+        -------
+        int
+            0 表示成功, 非0 表示失败
+        """
+        return self.SapModel.PointObj.SetConstraint(nodeName, DiaphragmName, ItemType, Replace)
