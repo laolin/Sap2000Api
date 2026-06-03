@@ -23,6 +23,48 @@ class Load:
 
 
     # ==============================================================================
+    #  面对象均布荷载 (Uniform Load on Area Objects)
+    #  在面对象上直接施加均布面荷载（非传递至框架）
+    # ==============================================================================
+    def addLoad_AreaUniform(self, areaName: str, patName: str, val: float,
+                             dir: str, Replace: bool = True, CSys: str = None, ItemType: int = 0):
+        """给面对象分配均布面荷载（需要对面单元进行剖分、最终是传递面单元的节点荷载到边梁上）
+
+        Parameters
+        ----------
+        areaName : str
+            面对象名称或组名称，取决于 ItemType 取值
+        patName : str
+            已定义的荷载模式名称
+        val : float
+            均布荷载值 [F/L²]
+        dir : str
+            荷载方向, 支持以下 6 种字符串:
+              "LOCAL1" 局部1轴    "LOCAL2" 局部2轴    "LOCAL3" 局部3轴
+              "X"      X方向     "Y"      Y方向     "Z"      Z方向
+        Replace : bool
+            是否替换该荷载模式下已有的均布荷载, 默认True
+        CSys : str, optional
+            坐标系名称, 默认 None 时由 dir 自动推断 (LOCALx→"Local", X/Y/Z→"Global")
+            也可手动指定坐标系名称
+        ItemType : int
+            指定 areaName 的含义: 0=Object(按名称), 1=Group(按组), 2=SelectedObjects(按选中对象),
+            默认0
+
+        Returns
+        -------
+        int
+            0 表示成功, 非0 表示失败
+        """
+        nDir, autoCSys = self._dir_to_int_csys(dir)
+        if CSys is None:
+            CSys = autoCSys
+        ret = self.SapModel.AreaObj.SetLoadUniform(
+            areaName, patName, val, nDir, Replace, CSys, ItemType
+        )
+        return ret
+
+    # ==============================================================================
     #  面对象均布至框架荷载 (Uniform to Frame Load on Area Objects)
     #  将面对象上的均布荷载按单向或双向传递到其支撑框架上
     # ==============================================================================
