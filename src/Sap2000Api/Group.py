@@ -13,8 +13,24 @@ class Group:
     def deleteGroup(self, grpName):
         return self.SapModel.GroupDef.Delete(grpName)
 
+    @staticmethod
+    def _ret_code(ret):
+        return ret[0] if isinstance(ret, tuple) and len(ret) > 0 else ret
+
     def addNodeToGroup(self, grpName, nodeNameList):
-        for n in nodeNameList: self.SapModel.PointObj.SetGroupAssign(n, grpName)
+        failed = []
+        for n in nodeNameList:
+            ret = self.SapModel.PointObj.SetGroupAssign(n, grpName)
+            ret_code = self._ret_code(ret)
+            if ret_code not in (None, 0):
+                failed.append((n, ret))
+        return 0 if not failed else failed
 
     def addFrameToGroup(self, grpName, frameNameList):
-        for n in frameNameList: self.SapModel.FrameObj.SetGroupAssign(n, grpName)
+        failed = []
+        for n in frameNameList:
+            ret = self.SapModel.FrameObj.SetGroupAssign(n, grpName)
+            ret_code = self._ret_code(ret)
+            if ret_code not in (None, 0):
+                failed.append((n, ret))
+        return 0 if not failed else failed
