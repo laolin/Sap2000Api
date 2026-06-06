@@ -55,7 +55,8 @@ class Node:
         int
             0 表示成功, 非0 表示失败
         """
-        return self.SapModel.ConstraintDef.SetDiaphragm(name, axis, CSys)
+        ret = self.SapModel.ConstraintDef.SetDiaphragm(name, axis, CSys)
+        return ret[0] if isinstance(ret, tuple) and len(ret) > 0 else ret
 
     # ==============================================================================
     #  将节点分配到约束 (Assign Constraint to Point Objects)
@@ -81,4 +82,6 @@ class Node:
         int
             0 表示成功, 非0 表示失败
         """
-        return self.SapModel.PointObj.SetConstraint(nodeName, DiaphragmName, ItemType, Replace)
+        ret = self.SapModel.PointObj.SetConstraint(nodeName, DiaphragmName, ItemType, Replace)
+
+        return ret[0] if isinstance(ret, tuple) and len(ret) > 0 else ret
